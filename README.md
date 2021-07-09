@@ -92,4 +92,5 @@
 위의 내용을 순서도로 그려보았다. (잘 안보일때를 대비해 파일을 첨부함. https://app.diagrams.net/ 에서 파일을 열수 있다.)
 ![ddd](https://user-images.githubusercontent.com/77449586/125057628-6b29d100-e0e4-11eb-888a-31e4d8aaef95.png)
 
-
+**코드 짜기**
+이제 위에서 구성한것들을 바탕으로 코드를 짜볼것이다.
