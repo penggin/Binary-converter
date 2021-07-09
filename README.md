@@ -129,6 +129,7 @@ def starting():
     >>"""
         )
     )
-    ```
     
-    위의 코드는 변환할수, 변환할수의 진수, 변환시킬 수의 진수를 입력받아 각각 `input_num`, `input_num_type`, `convert_num_type` 라는 이름의 변수에 저장된다.
+```
+    
+위의 코드는 변환할수, 변환할수의 진수, 변환시킬 수의 진수를 입력받아 각각 `input_num`, `input_num_type`, `convert_num_type` 라는 이름의 변수에 저장된다.
