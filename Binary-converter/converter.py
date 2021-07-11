@@ -4,55 +4,68 @@ import string
 
 
 def main():
-    starting()
+    res = starting()  # 값을 입력받는 함수를 호출한다.
+    print(f"결괏값은 {res} 입니다.")  # 결괏값을 출력한다.
+    answer_y = ["y", "Y"]  # yes
+    answer_n = ["n", "N"]  # no
+    while True:  # 무한히 반복한다.
+        isrestart = input("다른수를 계산하시겠습니까? (y/n)\n>>")  # 다시 계산할건지 물어보기
+        if isrestart in answer_y or isrestart in answer_n:  # 만약 대답이 리스트에 있다면
+            break  # 반복문 탈출
+    if isrestart in answer_n:  # 만약 사용자가 아니요를 선택했다면
+        print("프로그램을 종료합니다.")  # 출력
+        return  # 함수의 뒷부분을 실행시키지 않도록 리턴시킨다.
+    main()
 
 
 def starting():
-    input_num = int(input("변환할 수를 입력해주세요...\n>>"))
+    input_num = input(
+        "변환할 수를 입력해주세요...\n>>"
+    )  # 콘솔에 input() 함수안의 문자열을 출력하고, 입력받은 값을 input_num에 저장한다.
     input_num_type = int(
         input(
             """입력한 수가 몇진수인지 아래의 표를보고 숫자를 입력해주세요.
     1. 2진수
     2. 10진수
     3. 16진수
-    >>"""
+>>"""
         )
-    )
+    )  # 콘솔에 input() 함수안의 문자열을 출력하고, 입력받은 값을 input_num_type 에 저장한다.
     convert_num_type = int(
         input(
             """입력한 수를 어떤수로 변환하시겠습니까?
     1. 2진수
     2. 10진수
     3. 16진수
-    >>"""
+>>"""
         )
-    )
+    )  # 콘솔에 input() 함수안의 문자열을 출력하고, 입력받은 값을 convert_num_type 에 저장한다.
     try:
         if input_num_type == 1:  # 만약 입력값이 2진수일때
             if convert_num_type == 1:  # 만약 출력할 값이 2진수일때
-                ...
+                res = _2_to_2(input_num)
             elif convert_num_type == 2:  # 만약 출력할 값이 10진수일때
-                ...
+                res = _2_to_10(input_num)
             elif convert_num_type == 3:  # 만약 출력할 값이 16진수일때
-                ...
+                res = _2_to_16(input_num)
             else:
                 raise ValueError("올바르지 않은 입력값입니다. [1, 2, 3] 중 하나를 입력해주세요.")
         elif input_num_type == 2:  # 만약 입력값이 10진수일때
             if convert_num_type == 1:  # 만약 출력할 값이 2진수일때
-                ...
+                res = _10_to_2(input_num)
             elif convert_num_type == 2:  # 만약 출력할 값이 10진수일때
-                ...
+                res = _10_to_10(input_num)
             elif convert_num_type == 3:  # 만약 출력할 값이 16진수일때
-                ...
+                res = _10_to_16(input_num)
             else:
                 raise ValueError("올바르지 않은 입력값입니다. [1, 2, 3] 중 하나를 입력해주세요.")
         elif input_num_type == 3:  # 만약 입력값이 16진수일때
             if convert_num_type == 1:  # 만약 출력할 값이 2진수일때
-                ...
+                res = _16_to_2(input_num)
             elif convert_num_type == 2:  # 만약 출력할 값이 10진수일때
-                ...
+                res = _16_to_10(input_num)
             elif convert_num_type == 3:  # 만약 출력할 값이 16진수일때
-                ...
+                res = _16_to_16(input_num)
             else:
                 raise ValueError("올바르지 않은 입력값입니다. [1, 2, 3] 중 하나를 입력해주세요.")
         else:
@@ -61,6 +74,8 @@ def starting():
         ...
     except Exception as error:
         print(f"알수없는 오류가 발생하였습니다. {error}")
+
+    return res
 
 
 # assets
@@ -122,11 +137,11 @@ dict_2_16 = {
 }
 
 # 2진수
-def _2_to_2(num):
+def _2_to_2(num: str) -> str:
     return num
 
 
-def _2_to_10(num):
+def _2_to_10(num: str) -> int:
     num = str(
         num
     )  # 정수형 (int)은 제일뒤의 글자를 자르는 등의 행위에는 적합하지 않음으로, 자르는것에 적합한 문자열(str) 으로 변환한다.
@@ -148,7 +163,7 @@ def _2_to_10(num):
     return res  # 만약 이곳에 도달한다면, 계산이 모두 끝난것이므로, 결괏값을 반환한다.
 
 
-def _2_to_16(num):
+def _2_to_16(num: str) -> str:
     num = str(num)
     res = []  # 나중에 순서를 뒤집기 편한 리스트에 결괏값을 저장한다.
     while num:  # str(문자열)형은 ""(아무것도 없을때) 일때 False 이다. 그러므로 num이라는 문자열 안에 내용이 있을때 반복한다.
@@ -170,11 +185,14 @@ def _2_to_16(num):
 
 
 # 10진수
-def _10_to_10(num):
+def _10_to_10(num: str) -> str:
     return num
 
 
-def _10_to_2(num: int):  # 10진수를 2진수로 바꾸는 함수이다. 입력값의 타입은 타입힌트를 통해 "정수형" 임을 명시해두었다.
+def _10_to_2(
+    num: str,
+) -> str:  # 10진수를 2진수로 바꾸는 함수이다. 입력값의 타입은 타입힌트를 통해 "정수형" 임을 명시해두었다.
+    num = int(num)  # 계산을 위해 정수형으로 변환한다.
     res = []  # 나중에 순서를 뒤집기 편한 리스트에 결괏값을 저장한다.
     while num > 1:  # 수가 1보다 크면 반복한다.
         num_quotient = num // 2  # 입력값을 2로나눈 몫이다.
@@ -187,10 +205,42 @@ def _10_to_2(num: int):  # 10진수를 2진수로 바꾸는 함수이다. 입력
     return res  # 결괏값을 반환한다.
 
 
-def _10_to_16(num: int):  # 10진수를 16진수로 바꾸는 함수이다. 입력값의 타입은 타입힌트를 통해 "정수형" 임을 명시해두었다.
+def _10_to_16(
+    num: str,
+) -> str:  # 10진수를 16진수로 바꾸는 함수이다. 입력값의 타입은 타입힌트를 통해 "정수형" 임을 명시해두었다.
     num = str(_10_to_2(num))  # 입력값을 2진수로 변환한다.
     res = _2_to_16(num)  # 2진수로 변환된 입력값을 16진수로 변환한다.
     return res  # 결괏값을 반환한다.
 
 
-print(_10_to_16(6874162))
+# 16진수
+def _16_to_16(num: str) -> str:
+    return num
+
+
+def _16_to_2(num: str) -> str:
+    res = []  # 나중에 순서를 뒤집기 편한 리스트에 결괏값을 저장한다.
+    while num:  # str(문자열)형은 ""(아무것도 없을때) 일때 False 이다. 그러므로 num이라는 문자열 안에 내용이 있을때 반복한다.
+        num_bit = num[-1:]  # num_bit 에 num의 제일 마지막 글자를 할당한다.
+        if len(num) == 1:  # 만약 num의 길이가 1이라면
+            num = ""  # num에 공백을 할당한다.
+        else:  # 위의 조건이 성립하지 않는다면
+            num = num[:-1]  # num은 초기num의 제일마지막글자를 제외한 값이다.
+        res.append(dict_16_2[num_bit])  # list에 dict_16_2에 num_bit를 대입한 결괏값을 대입한다.
+    res.reverse()  # 리스트를 뒤집는다.
+    res = "".join(res)  # 리스트를 문자열로 합친다.
+    while True:  # 계속 반복한다는 의미이다.
+        if res[:1] == "0":  # 만약 제일 앞글자가 0이라면
+            res = res[1:]  # res는 res에서 제일앞글자(0)를 제외한 값이다.
+        else:  # 위의 조건이 성립하지 않는다면
+            break  # 반복문을 탈출(정지) 한다.
+    return res  # 결괏값을 반환한다.
+
+
+def _16_to_10(num: str) -> int:
+    num = _16_to_2(num)  # 입력값을 2진수로 변환한다.
+    res = _2_to_10(num)  # 2진수로 변환된 값을 10진수로 변환한다.
+    return res
+
+
+main()
