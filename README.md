@@ -351,7 +351,7 @@ def _10_to_2(
     num: str,
 ) -> str:  # 10진수를 2진수로 바꾸는 함수이다. 입력값의 타입은 타입힌트를 통해 "정수형" 임을 명시해두었다.
     res = []  # 나중에 순서를 뒤집기 편한 리스트에 결괏값을 저장한다.
-    while num > 1:  # 수가 1보다 크면 반복한다.
+    while len(num) > 1:  # 수가 1보다 크면 반복한다.
         num_quotient = num // 2  # 입력값을 2로나눈 몫이다.
         num_remainder = num % 2  # 입력값을 2로나눈 나머지다.
         res.append(str(num_remainder))  # 리스트에 나머지를 추가한다.
@@ -382,7 +382,7 @@ def _10_to_2(
 ```python
 def _10_to_16(num: str)-> str:  # 10진수를 16진수로 바꾸는 함수이다. 입력값의 타입은 타입힌트를 통해 "정수형" 임을 명시해두었다.
     res = []  # 나중에 순서를 뒤집기 편한 리스트에 결괏값을 저장한다.
-    while num > 1:  # 수가 1보다 크면 반복한다.
+    while len(num) > 1:  # 수가 1보다 크면 반복한다.
         num_quotient = num // 2  # 입력값을 2로나눈 몫이다.
         num_remainder = num % 2  # 입력값을 2로나눈 나머지다.
         res.append(str(num_remainder))  # 리스트에 나머지를 추가한다.
