@@ -438,7 +438,7 @@ def _16_to_16(num: str) -> str:
 ```
 
 다음은 16진수를 입력받아 2진수를 반환하는 경우이다.
-[16-2 이미지]
+![image](https://user-images.githubusercontent.com/77449586/125194721-74a26d00-e28d-11eb-9885-d8845f2779aa.png)
 ```python
 def _16_to_2(num: str) -> str:
     res = [] # 나중에 순서를 뒤집기 편한 리스트에 결괏값을 저장한다.
@@ -486,7 +486,7 @@ def _16_to_2(num: str) -> str:
 다음과 같이 수정함으로써 앞의 0들을 제거할수있다.
 
 마지막으로 16진수를 10진수로 변환하는 경우이다.
-[16-10 이미지]
+![image](https://user-images.githubusercontent.com/77449586/125194731-7ec46b80-e28d-11eb-94e8-37d4e18232f8.png)
 
 어라? 이것도 위에서 같은 기능이 있었던것 같다.
 위의 순서도에서는 16진수를 2진수로 바꾼후, 2진수를 10진수로 만들었는데, 우리는 이미 다 만들어놨다.
@@ -527,8 +527,82 @@ def 함수이름(변수명:str) -> str:
 이 타입힌트는 실질적으로는 코드에 **아무런 영향을 주지 못한다.**
 하지만 이런식으로 타입을 지정해놓으면 개발할때 매우 편해진다.
 다음의 사진은 타입힌트를 지정하지 않고, 그 함수를 사용할때의 모습이다.
+![image](https://user-images.githubusercontent.com/77449586/125194786-ac111980-e28d-11eb-94e8-f49e6af296a3.png)
+이때, 에디터는 변수들의 타입이 무었인지 모르기때문에, any로 지정한다.
+이번엔 타입을 지정한뒤 다시 사용해보자!
+![image](https://user-images.githubusercontent.com/77449586/125194818-d06cf600-e28d-11eb-9786-4a5aa5b0ca5a.png)
+이것처럼 에디터가 "num의 타입은 int이고, 리턴값도 int야!" 라고 알려주는것을 볼수있다.
+
+타입힌트처럼 코드실행엔 영향을 주진 않지만, 개발에 도움을 주는것이 또 있는데, 그것은 바로 문서화(docstring)이다!
+docstring은 함수 아래에 """ """ 같이 쌍따옴표를 3번씩 사용하여 적고, 여러줄을 작성할수 있다.
+아래는 docstring를 작성하고, 사용하는 모습이다.
+![image](https://user-images.githubusercontent.com/77449586/125194933-5e48e100-e28e-11eb-8442-f8db58828e12.png)
+이런식으로 코드들을 문서화 해놓으면 매우 편해진다!
 
 이제 처음에 값을 입력받는 코드와, 메인코드를 완성시켜보자.
 
 **코드 마무리 하기**
 
+제일 처음에 짰던 값을 입력받는 코드는 다음과 같이 완성할수 있다.
+```python
+def starting():
+    input_num = input(
+        "변환할 수를 입력해주세요...\n>>"
+    )  # 콘솔에 input() 함수안의 문자열을 출력하고, 입력받은 값을 input_num에 저장한다.
+    input_num_type = int(
+        input(
+            """입력한 수가 몇진수인지 아래의 표를보고 숫자를 입력해주세요.
+    1. 2진수
+    2. 10진수
+    3. 16진수
+    >>"""
+        )
+    )  # 콘솔에 input() 함수안의 문자열을 출력하고, 입력받은 값을 input_num_type 에 저장한다.
+    convert_num_type = int(
+        input(
+            """입력한 수를 어떤수로 변환하시겠습니까?
+    1. 2진수
+    2. 10진수
+    3. 16진수
+    >>"""
+        )
+    )  # 콘솔에 input() 함수안의 문자열을 출력하고, 입력받은 값을 convert_num_type 에 저장한다.
+    try:
+        if input_num_type == 1:  # 만약 입력값이 2진수일때
+            if convert_num_type == 1:  # 만약 출력할 값이 2진수일때
+                res = _2_to_2(input_num)
+            elif convert_num_type == 2:  # 만약 출력할 값이 10진수일때
+                res = _2_to_10(input_num)
+            elif convert_num_type == 3:  # 만약 출력할 값이 16진수일때
+                res = _2_to_16(input_num)
+            else:
+                raise ValueError("올바르지 않은 입력값입니다. [1, 2, 3] 중 하나를 입력해주세요.")
+        elif input_num_type == 2:  # 만약 입력값이 10진수일때
+            if convert_num_type == 1:  # 만약 출력할 값이 2진수일때
+                res = _10_to_2(input_num)
+            elif convert_num_type == 2:  # 만약 출력할 값이 10진수일때
+                res = _10_to_10(input_num)
+            elif convert_num_type == 3:  # 만약 출력할 값이 16진수일때
+                res = _10_to_16(input_num)
+            else:
+                raise ValueError("올바르지 않은 입력값입니다. [1, 2, 3] 중 하나를 입력해주세요.")
+        elif input_num_type == 3:  # 만약 입력값이 16진수일때
+            if convert_num_type == 1:  # 만약 출력할 값이 2진수일때
+                res = _2_to_2(input_num)
+            elif convert_num_type == 2:  # 만약 출력할 값이 10진수일때
+                res = _2_to_10(input_num)
+            elif convert_num_type == 3:  # 만약 출력할 값이 16진수일때
+                res = _2_to_16(input_num)
+            else:
+                raise ValueError("올바르지 않은 입력값입니다. [1, 2, 3] 중 하나를 입력해주세요.")
+        else:
+            raise ValueError("올바르지 않은 입력값입니다. [1, 2, 3] 중 하나를 입력해주세요.")
+    except ValueError:
+        ...
+    except Exception as error:
+        print(f"알수없는 오류가 발생하였습니다. {error}")
+
+    return res
+```
+
+그리고, 시작시키고 반복하거나 종료하는 기능을 가진 메인함수도 만들어보자.
